@@ -1,39 +1,17 @@
-const {readFile, writeFile} = require('fs');
-const util = require('util');
-const readFilePromise = util.promisify(readFile)
-const writeFilePromise = util.promisify(writeFile)
+const http = require('http')
 
-// path = './first.txt';
 
-// const getText = (path) => {
-//     return new Promise ((resolve,reject)=>{
-//         readFile(path,'utf8',(err,data) => {
-//             if (err) {
-//                 reject(err);
-//             } else {
-//                 resolve(data);
-//             }
-//         })
+// const server = http.createServer((req, res) =>{
+//     res.end('Welcome')
 // })
-// }
 
-// GETTING RESULT
+// Using Event emitter API
+const server = http.createServer()
 
-// getText(path)
-// .then((result) => console.log(result))
-// .catch((err) => console.log(err))
+// Emits requrest event
+// subscribes to it / listen for it / respond to it
+server.on('request',(req,res)=>{
+    res.end('Welcome')
+})
 
-// GETTING CLEANER RESULT WITH SHORT APPROACH
-const start = async () =>{
-    try {
-        const first = await readFilePromise('./first.txt','utf8')    
-        const second = await readFilePromise('./second.txt','utf8')    
-        await  writeFilePromise('./result-mind-grenade.txt',`THIS IS AWESOME : ${first} ${second}`)
-        console.log(first);
-        console.log(second);
-    } catch (error) {
-        console.log(error)
-    }
-    
-}
-start()
+server.listen(5000)
