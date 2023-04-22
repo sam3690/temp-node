@@ -1,5 +1,3 @@
-const { result } = require('lodash');
-
 const {readFile, writeFile} = require('fs').promises
 const {readFileSync, writeFileSync} = require('fs')
 
